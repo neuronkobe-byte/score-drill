@@ -6,94 +6,93 @@
 <title>点数計算ドリル</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;background:#0d1a10;color:#f2ede4;min-height:100vh;padding-bottom:40px;}
-.hdr{background:linear-gradient(180deg,#080f0b,#12201a);border-bottom:2px solid #c8a84b;padding:12px 16px;display:flex;align-items:center;gap:12px;}
-.hdr-icon{width:42px;height:42px;background:#c0392b;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:2px 2px 0 #7a0000;flex-shrink:0;}
-.hdr h1{font-size:17px;font-weight:900;color:#e6cc7a;letter-spacing:.08em;}
-.hdr p{font-size:10px;color:#7a9a8a;letter-spacing:.15em;margin-top:2px;}
-.stats{display:flex;background:#1a2e24;border-bottom:1px solid #253d2e;padding:8px 16px;gap:20px;align-items:center;}
-.sv{font-size:20px;font-weight:900;color:#e6cc7a;}
-.sl{font-size:10px;color:#7a9a8a;margin-left:2px;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;background:#fdf6ee;color:#4a3728;min-height:100vh;padding-bottom:40px;}
+.hdr{background:linear-gradient(180deg,#fff8f0,#fdecd8);border-bottom:3px solid #e8a87c;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(200,120,60,.1);}
+.hdr-icon{width:44px;height:44px;background:linear-gradient(135deg,#f4a261,#e76f51);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 2px 6px rgba(231,111,81,.3);flex-shrink:0;}
+.hdr h1{font-size:17px;font-weight:900;color:#c1440e;letter-spacing:.08em;}
+.hdr p{font-size:10px;color:#b08060;letter-spacing:.15em;margin-top:2px;}
+.stats{display:flex;background:#fff8f0;border-bottom:1px solid #f0d8c0;padding:8px 16px;gap:20px;align-items:center;box-shadow:0 1px 4px rgba(200,120,60,.08);}
+.sv{font-size:20px;font-weight:900;color:#e76f51;}
+.sl{font-size:10px;color:#b08060;margin-left:2px;}
 .scr{display:none;padding:16px;}
 .scr.on{display:block;}
-.st{font-size:22px;font-weight:900;color:#e6cc7a;text-align:center;margin-top:20px;letter-spacing:.1em;}
-.ss{text-align:center;color:#7a9a8a;font-size:12px;margin-top:6px;}
+.st{font-size:22px;font-weight:900;color:#c1440e;text-align:center;margin-top:20px;letter-spacing:.05em;}
+.ss{text-align:center;color:#b08060;font-size:12px;margin-top:6px;}
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0;}
-.mc{background:#1a2e24;border:1px solid #253d2e;border-radius:14px;padding:22px 12px;text-align:center;cursor:pointer;}
-.mc.feat{border-color:#c8a84b;}
-.mc:active{opacity:.7;}
+.mc{background:#fff;border:2px solid #f0d8c0;border-radius:18px;padding:22px 12px;text-align:center;cursor:pointer;box-shadow:0 2px 8px rgba(200,120,60,.08);transition:transform .1s;}
+.mc.feat{border-color:#f4a261;background:linear-gradient(135deg,#fff8f0,#fdecd8);}
+.mc:active{transform:scale(.97);}
 .mi{font-size:36px;margin-bottom:8px;}
-.mn{font-size:15px;font-weight:900;color:#e6cc7a;margin-bottom:4px;}
-.md{font-size:11px;color:#7a9a8a;line-height:1.5;}
-.pbw{background:#253d2e;border-radius:4px;height:6px;margin-bottom:14px;overflow:hidden;}
-.pbf{height:100%;background:linear-gradient(90deg,#267a4d,#c8a84b);border-radius:4px;transition:width .3s;}
-.qcard{background:#1a2e24;border:1px solid #253d2e;border-radius:14px;padding:16px;margin-bottom:14px;}
-.qn{font-size:10px;color:#c8a84b;letter-spacing:.2em;margin-bottom:10px;font-weight:700;}
+.mn{font-size:15px;font-weight:900;color:#c1440e;margin-bottom:4px;}
+.md{font-size:11px;color:#b08060;line-height:1.6;}
+.pbw{background:#f0d8c0;border-radius:4px;height:8px;margin-bottom:14px;overflow:hidden;}
+.pbf{height:100%;background:linear-gradient(90deg,#f4a261,#e76f51);border-radius:4px;transition:width .3s;}
+.qcard{background:#fff;border:2px solid #f0d8c0;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(200,120,60,.08);}
+.qn{font-size:10px;color:#e8a87c;letter-spacing:.2em;margin-bottom:10px;font-weight:700;}
 .qtags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
-.tag{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
-.tag.pos{background:rgba(39,174,96,.2);color:#5dde8a;border:1px solid rgba(39,174,96,.3);}
-.tag.win{background:rgba(200,168,75,.2);color:#e6cc7a;border:1px solid rgba(200,168,75,.3);}
-.tag.han{background:rgba(192,57,43,.2);color:#ff7a6a;border:1px solid rgba(192,57,43,.3);}
-.tag.fu{background:rgba(52,152,219,.2);color:#7ac8f5;border:1px solid rgba(52,152,219,.3);}
-.qmain{font-size:17px;font-weight:700;line-height:1.8;}
-.qmain .ac{color:#e6cc7a;}
-.albl{font-size:11px;color:#7a9a8a;letter-spacing:.15em;margin-bottom:10px;}
+.tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;}
+.tag.pos{background:#e8f5e9;color:#388e3c;border:1px solid #a5d6a7;}
+.tag.win{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;}
+.tag.han{background:#fce4ec;color:#c2185b;border:1px solid #f48fb1;}
+.tag.fu{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9;}
+.qmain{font-size:17px;font-weight:700;line-height:1.9;color:#4a3728;}
+.qmain .ac{color:#e76f51;font-weight:900;}
+.albl{font-size:11px;color:#b08060;letter-spacing:.15em;margin-bottom:10px;}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.cbtn{background:#1a2e24;border:2px solid #253d2e;border-radius:12px;padding:18px 8px;color:#f2ede4;font-size:22px;font-weight:900;cursor:pointer;text-align:center;}
+.cbtn{background:#fff;border:2px solid #f0d8c0;border-radius:14px;padding:18px 8px;color:#4a3728;font-size:22px;font-weight:900;cursor:pointer;text-align:center;box-shadow:0 1px 4px rgba(200,120,60,.08);}
 .cbtn:active{opacity:.7;}
-.cbtn.cor{border-color:#27ae60;background:rgba(39,174,96,.2);color:#5dde8a;}
-.cbtn.wrg{border-color:#c0392b;background:rgba(192,57,43,.15);color:#ff7a6a;}
-.cbtn.rcor{border-color:#27ae60;background:rgba(39,174,96,.08);}
-.csub{display:block;font-size:10px;color:#7a9a8a;margin-top:3px;font-weight:400;}
+.cbtn.cor{border-color:#66bb6a;background:#e8f5e9;color:#2e7d32;}
+.cbtn.wrg{border-color:#ef9a9a;background:#ffebee;color:#c62828;}
+.cbtn.rcor{border-color:#66bb6a;background:#f1f8f1;}
+.csub{display:block;font-size:10px;color:#b08060;margin-top:3px;font-weight:400;}
 .inpw{position:relative;margin-bottom:12px;}
-.sinp{width:100%;background:#0d1a10;border:2px solid #253d2e;border-radius:12px;color:#e6cc7a;font-size:32px;font-weight:900;padding:14px 80px 14px 18px;}
-.iunit{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:15px;color:#7a9a8a;}
+.sinp{width:100%;background:#fff8f0;border:2px solid #f0d8c0;border-radius:14px;color:#c1440e;font-size:32px;font-weight:900;padding:14px 80px 14px 18px;}
+.iunit{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:15px;color:#b08060;}
 .npad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
-.nb{background:#1a2e24;border:1px solid #253d2e;border-radius:10px;padding:15px;color:#f2ede4;font-size:22px;font-weight:700;cursor:pointer;text-align:center;}
-.nb:active{background:#1d5c3a;}
-.nb.del{font-size:15px;color:#7a9a8a;}
+.nb{background:#fff;border:2px solid #f0d8c0;border-radius:12px;padding:15px;color:#4a3728;font-size:22px;font-weight:700;cursor:pointer;text-align:center;box-shadow:0 1px 3px rgba(200,120,60,.08);}
+.nb:active{background:#fdecd8;}
+.nb.del{font-size:15px;color:#b08060;}
 .nb.z2{grid-column:span 2;}
-.sbtn{width:100%;padding:15px;background:linear-gradient(135deg,#c8a84b,#8a6020);border:none;border-radius:12px;color:#0a0a0a;font-size:17px;font-weight:900;letter-spacing:.15em;cursor:pointer;margin-bottom:12px;}
-.sbtn:active{opacity:.8;}
-.sbtn:disabled{opacity:.35;}
-.nbtn{width:100%;padding:14px;background:#1a2e24;border:2px solid #c8a84b;border-radius:12px;color:#e6cc7a;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.12em;}
+.sbtn{width:100%;padding:15px;background:linear-gradient(135deg,#f4a261,#e76f51);border:none;border-radius:14px;color:#fff;font-size:17px;font-weight:900;letter-spacing:.1em;cursor:pointer;margin-bottom:12px;box-shadow:0 3px 10px rgba(231,111,81,.3);}
+.sbtn:active{opacity:.85;}
+.sbtn:disabled{opacity:.4;}
+.nbtn{width:100%;padding:14px;background:#fff;border:2px solid #f4a261;border-radius:14px;color:#e76f51;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.08em;}
 .nbtn:active{opacity:.7;}
-.rpanel{border-radius:14px;padding:18px 16px;margin-bottom:14px;display:none;}
+.rpanel{border-radius:18px;padding:18px 16px;margin-bottom:14px;display:none;}
 .rpanel.on{display:block;}
-.rpanel.cor{background:rgba(39,174,96,.12);border:1px solid rgba(39,174,96,.4);}
-.rpanel.wrg{background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.4);}
+.rpanel.cor{background:#e8f5e9;border:2px solid #a5d6a7;}
+.rpanel.wrg{background:#ffebee;border:2px solid #ef9a9a;}
 .rhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .ric{font-size:30px;}
 .rtitle{font-size:20px;font-weight:900;}
-.rpanel.cor .rtitle{color:#5dde8a;}
-.rpanel.wrg .rtitle{color:#ff7a6a;}
-.arev{background:rgba(0,0,0,.3);border-radius:10px;padding:12px;margin-bottom:12px;}
-.arlbl{font-size:10px;color:#7a9a8a;letter-spacing:.15em;margin-bottom:5px;}
-.arval{font-size:26px;font-weight:900;color:#e6cc7a;}
-.expl{font-size:13px;line-height:1.8;}
-.rcard{background:#1a2e24;border:2px solid #c8a84b;border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:16px;}
+.rpanel.cor .rtitle{color:#2e7d32;}
+.rpanel.wrg .rtitle{color:#c62828;}
+.arev{background:rgba(255,255,255,.7);border-radius:12px;padding:12px;margin-bottom:12px;}
+.arlbl{font-size:10px;color:#b08060;letter-spacing:.15em;margin-bottom:5px;}
+.arval{font-size:26px;font-weight:900;color:#c1440e;}
+.expl{font-size:13px;line-height:1.8;color:#4a3728;}
+.rcard{background:#fff;border:2px solid #f4a261;border-radius:20px;padding:28px 20px;text-align:center;margin-bottom:16px;box-shadow:0 4px 16px rgba(200,120,60,.12);}
 .rce{font-size:52px;margin-bottom:10px;}
-.rct{font-size:22px;font-weight:900;color:#e6cc7a;margin-bottom:6px;}
-.rcs{font-size:48px;font-weight:900;color:#e6cc7a;line-height:1;margin:10px 0 4px;}
-.rcss{font-size:12px;color:#7a9a8a;}
+.rct{font-size:22px;font-weight:900;color:#c1440e;margin-bottom:6px;}
+.rcs{font-size:48px;font-weight:900;color:#e76f51;line-height:1;margin:10px 0 4px;}
+.rcss{font-size:12px;color:#b08060;}
 .rstars{font-size:26px;letter-spacing:4px;margin:10px 0;}
-.blist{background:#1a2e24;border:1px solid #253d2e;border-radius:12px;overflow:hidden;margin-bottom:14px;}
-.bi{display:flex;align-items:flex-start;padding:11px 14px;border-bottom:1px solid #253d2e;gap:10px;}
+.blist{background:#fff;border:2px solid #f0d8c0;border-radius:14px;overflow:hidden;margin-bottom:14px;}
+.bi{display:flex;align-items:flex-start;padding:11px 14px;border-bottom:1px solid #f0d8c0;gap:10px;}
 .bi:last-child{border-bottom:none;}
 .bdot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
-.bdot.c{background:#27ae60;}
-.bdot.w{background:#c0392b;}
-.bq{font-size:12px;color:#7a9a8a;margin-bottom:2px;}
-.ba{font-size:13px;}
-.bca{font-size:11px;color:#5dde8a;margin-top:2px;}
-.slbl{font-size:12px;color:#c8a84b;letter-spacing:.2em;margin-bottom:10px;padding-left:10px;border-left:3px solid #c8a84b;}
-.bbk{width:100%;padding:13px;background:transparent;border:1px solid #253d2e;border-radius:12px;color:#7a9a8a;font-size:14px;cursor:pointer;margin-top:8px;}
-/* 期限切れ画面 */
+.bdot.c{background:#66bb6a;}
+.bdot.w{background:#ef9a9a;}
+.bq{font-size:12px;color:#b08060;margin-bottom:2px;}
+.ba{font-size:13px;color:#4a3728;}
+.bca{font-size:11px;color:#388e3c;margin-top:2px;}
+.slbl{font-size:12px;color:#e8a87c;letter-spacing:.2em;margin-bottom:10px;padding-left:10px;border-left:3px solid #f4a261;}
+.bbk{width:100%;padding:13px;background:transparent;border:2px solid #f0d8c0;border-radius:14px;color:#b08060;font-size:14px;cursor:pointer;margin-top:8px;}
 .expired{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;padding:32px 24px;text-align:center;}
 .expired-icon{font-size:64px;margin-bottom:20px;}
-.expired-title{font-size:22px;font-weight:900;color:#e6cc7a;margin-bottom:12px;}
-.expired-msg{font-size:14px;color:#7a9a8a;line-height:1.8;}
-.expired-school{margin-top:24px;font-size:12px;color:#c8a84b;letter-spacing:.15em;}
+.expired-title{font-size:22px;font-weight:900;color:#c1440e;margin-bottom:12px;}
+.expired-msg{font-size:14px;color:#b08060;line-height:1.9;}
+.expired-school{margin-top:24px;font-size:12px;color:#e8a87c;letter-spacing:.15em;}
 </style>
 </head>
 <body>
@@ -104,54 +103,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","H
     <p>ニューロン麻雀スクール神戸校</p>
   </div>
 </div>
-
-<div id="app">
-<!-- コンテンツはJSで描画 -->
-</div>
-
+<div id="app"></div>
 <script>
 (function(){
 "use strict";
-
-// ★ 公開期限（この日の23:59まで使用可能）
-var EXPIRY = new Date('2026-05-31T23:59:59');
-
-// 期限チェック
-if(new Date() > EXPIRY){
-  document.getElementById('app').innerHTML =
-    '<div class="expired">' +
-    '<div class="expired-icon">🀄</div>' +
-    '<div class="expired-title">公開期間が終了しました</div>' +
-    '<div class="expired-msg">この教材の公開期間は<br>2026年5月31日をもって終了しました。<br><br>点数計算の続きは<br>ぜひ授業で練習しましょう！</div>' +
-    '<div class="expired-school">ニューロン麻雀スクール神戸校</div>' +
-    '</div>';
+var EXPIRY=new Date('2026-05-31T23:59:59');
+if(new Date()>EXPIRY){
+  document.getElementById('app').innerHTML='<div class="expired"><div class="expired-icon">🀄</div><div class="expired-title">公開期間が終了しました</div><div class="expired-msg">この教材の公開期間は<br>2026年5月31日をもって終了しました。<br><br>点数計算の続きは<br>ぜひ授業で練習しましょう！</div><div class="expired-school">ニューロン麻雀スクール神戸校</div></div>';
   return;
 }
-
-// 通常のアプリ描画
-document.getElementById('app').innerHTML =
+document.getElementById('app').innerHTML=
 '<div class="stats"><span class="sv" id="st-total">0</span><span class="sl">問</span><span class="sv" id="st-cor">0</span><span class="sl">正解</span><span class="sv" id="st-str">0</span><span class="sl">連続</span></div>'+
-'<div id="s-start" class="scr on"><div class="st">点数計算を鍛えよう</div><div class="ss">モードを選んでスタート</div><div style="font-size:11px;color:#c8a84b;text-align:center;margin-top:8px;">公開期限：2026年5月31日</div><div class="mgrid"><div class="mc feat" onclick="go(\'choice\',\'easy\')"><div class="mi">🌿</div><div class="mn">初級</div><div class="md">基本的な翻符<br>4択で回答</div></div><div class="mc" onclick="go(\'choice\',\'normal\')"><div class="mi">🔥</div><div class="mn">中級</div><div class="md">高翻数・様々な符<br>4択で回答</div></div><div class="mc" onclick="go(\'input\',\'easy\')"><div class="mi">✏️</div><div class="mn">入力初級</div><div class="md">数字を自分で<br>入力して回答</div></div><div class="mc" onclick="go(\'input\',\'normal\')"><div class="mi">⚡</div><div class="mn">入力中級</div><div class="md">高翻数・様々な符<br>数字入力</div></div></div></div>'+
+'<div id="s-start" class="scr on"><div class="st">点数計算を鍛えよう🀄</div><div class="ss">モードを選んでスタート</div><div style="font-size:11px;color:#e8a87c;text-align:center;margin-top:6px;">公開期限：2026年5月31日</div><div class="mgrid"><div class="mc feat" onclick="go(\'choice\',\'easy\')"><div class="mi">🌸</div><div class="mn">初級</div><div class="md">基本的な翻符<br>4択で回答</div></div><div class="mc" onclick="go(\'choice\',\'normal\')"><div class="mi">🌺</div><div class="mn">中級</div><div class="md">高翻数・様々な符<br>4択で回答</div></div><div class="mc" onclick="go(\'input\',\'easy\')"><div class="mi">✏️</div><div class="mn">入力初級</div><div class="md">数字を自分で<br>入力して回答</div></div><div class="mc" onclick="go(\'input\',\'normal\')"><div class="mi">⭐</div><div class="mn">入力中級</div><div class="md">高翻数・様々な符<br>数字入力</div></div></div></div>'+
 '<div id="s-quiz" class="scr"><div class="pbw"><div class="pbf" id="pb" style="width:0%"></div></div><div class="qcard"><div class="qn" id="qn">QUESTION 1 / 10</div><div class="qtags" id="qtags"></div><div class="qmain" id="qmain"></div></div><div class="albl">▶ 何点？</div><div id="ca"><div class="cgrid" id="cg"></div></div><div id="ia" style="display:none"></div><div class="rpanel" id="rp"><div class="rhead"><span class="ric" id="ric"></span><span class="rtitle" id="rt"></span></div><div class="arev"><div class="arlbl">正解</div><div class="arval" id="arv"></div></div><div class="expl" id="expl"></div><div style="height:80px"></div></div></div>'+
-'<div id="nxtbar" style="display:none;position:fixed;bottom:0;left:0;right:0;padding:12px 16px 28px;background:linear-gradient(transparent,#0d1a10 40%);z-index:100;"><button class="nbtn" id="nxtbtn" style="display:block" onclick="next()">次の問題へ →</button></div>'+
+'<div id="nxtbar" style="display:none;position:fixed;bottom:0;left:0;right:0;padding:12px 16px 28px;background:linear-gradient(transparent,#fdf6ee 40%);z-index:100;"><button class="nbtn" id="nxtbtn" style="display:block" onclick="next()">次の問題へ →</button></div>'+
 '<div id="s-result" class="scr"><div class="rcard"><div class="rce" id="re">🎊</div><div class="rct" id="rt2">お疲れさま！</div><div class="rstars" id="rs">☆☆☆</div><div class="rcs" id="rscore">10/10</div><div class="rcss" id="rsub"></div></div><div class="slbl">問題ごとの結果</div><div class="blist" id="blist"></div><button class="sbtn" onclick="retry()">もう一度やる</button><button class="bbk" onclick="home()">モード選択へ戻る</button></div>';
 
 function c100(n){return Math.ceil(n/100)*100;}
-function bpts(han,fu){
-  if(han>=13)return 8000;if(han>=11)return 6000;if(han>=8)return 4000;
-  if(han>=6)return 3000;if(han>=5)return 2000;
-  var r=fu*Math.pow(2,han+2);return r>=2000?2000:r;
-}
-function calcAns(han,fu,pos,win){
-  var b=bpts(han,fu);
-  if(win==='ron'){var t=pos==='dealer'?c100(b*6):c100(b*4);return {type:'ron',total:t};}
-  else{if(pos==='dealer'){var each=c100(b*2);return {type:'dealer_tsumo',each:each,total:each*3};}
-  else{var d=c100(b*2),ch=c100(b);return {type:'child_tsumo',dealer:d,child:ch,total:d+ch*2};}}
-}
-function hlbl(han){
-  if(han>=13)return '役満';if(han>=11)return '三倍満';if(han>=8)return '倍満';
-  if(han>=6)return '跳満';if(han>=5)return '満貫';return han+'翻';
-}
+function bpts(han,fu){if(han>=13)return 8000;if(han>=11)return 6000;if(han>=8)return 4000;if(han>=6)return 3000;if(han>=5)return 2000;var r=fu*Math.pow(2,han+2);return r>=2000?2000:r;}
+function calcAns(han,fu,pos,win){var b=bpts(han,fu);if(win==='ron'){var t=pos==='dealer'?c100(b*6):c100(b*4);return {type:'ron',total:t};}else{if(pos==='dealer'){var each=c100(b*2);return {type:'dealer_tsumo',each:each,total:each*3};}else{var d=c100(b*2),ch=c100(b);return {type:'child_tsumo',dealer:d,child:ch,total:d+ch*2};}}}
+function hlbl(han){if(han>=13)return '役満';if(han>=11)return '三倍満';if(han>=8)return '倍満';if(han>=6)return '跳満';if(han>=5)return '満貫';return han+'翻';}
 function nm(n){var s=String(Math.floor(n)),r='';for(var i=0;i<s.length;i++){if(i>0&&(s.length-i)%3===0)r+=',';r+=s[i];}return r;}
 var QE=[{h:1,f:30,p:'dealer',w:'ron'},{h:1,f:30,p:'child',w:'ron'},{h:2,f:30,p:'dealer',w:'ron'},{h:2,f:30,p:'child',w:'ron'},{h:3,f:30,p:'dealer',w:'ron'},{h:3,f:30,p:'child',w:'ron'},{h:4,f:30,p:'dealer',w:'ron'},{h:4,f:30,p:'child',w:'ron'},{h:5,f:0,p:'dealer',w:'ron'},{h:5,f:0,p:'child',w:'ron'},{h:1,f:40,p:'dealer',w:'ron'},{h:1,f:40,p:'child',w:'ron'},{h:2,f:40,p:'dealer',w:'ron'},{h:2,f:40,p:'child',w:'ron'},{h:3,f:40,p:'dealer',w:'ron'},{h:3,f:40,p:'child',w:'ron'},{h:2,f:50,p:'dealer',w:'ron'},{h:2,f:50,p:'child',w:'ron'},{h:1,f:30,p:'dealer',w:'tsumo'},{h:2,f:30,p:'child',w:'tsumo'},{h:2,f:40,p:'dealer',w:'tsumo'},{h:3,f:30,p:'child',w:'tsumo'}];
 var QN=[{h:3,f:30,p:'dealer',w:'tsumo'},{h:3,f:40,p:'child',w:'ron'},{h:4,f:30,p:'dealer',w:'ron'},{h:4,f:40,p:'child',w:'tsumo'},{h:5,f:0,p:'dealer',w:'ron'},{h:5,f:0,p:'child',w:'ron'},{h:6,f:0,p:'dealer',w:'ron'},{h:6,f:0,p:'child',w:'ron'},{h:1,f:50,p:'dealer',w:'ron'},{h:2,f:60,p:'child',w:'ron'},{h:3,f:50,p:'dealer',w:'tsumo'},{h:1,f:40,p:'child',w:'tsumo'},{h:2,f:70,p:'dealer',w:'ron'},{h:8,f:0,p:'dealer',w:'ron'},{h:8,f:0,p:'child',w:'ron'},{h:11,f:0,p:'dealer',w:'ron'},{h:11,f:0,p:'child',w:'ron'},{h:13,f:0,p:'dealer',w:'ron'},{h:13,f:0,p:'child',w:'ron'}];
@@ -164,13 +135,13 @@ function updStats(){document.getElementById('st-total').textContent=ST.totA;docu
 window.go=function(mode,diff){ST.mode=mode;ST.diff=diff;var pool=diff==='easy'?QE:QE.concat(QN);ST.qs=shuf(pool).slice(0,10);ST.cur=0;ST.ans=[];ST.done=false;showScr('s-quiz');renderQ();};
 window.home=function(){showScr('s-start');};
 window.retry=function(){window.go(ST.mode,ST.diff);};
-function renderQ(){var q=ST.qs[ST.cur];ST.done=false;document.getElementById('pb').style.width=(ST.cur/ST.qs.length*100)+'%';document.getElementById('qn').textContent='QUESTION '+(ST.cur+1)+' / '+ST.qs.length;var posL=q.p==='dealer'?'親':'子';var winL=q.w==='ron'?'ロン':'ツモ';var hanL=q.h>=13?'役満':hlbl(q.h)+(q.h<=4?' '+q.h+'翻':'');var tags='<span class="tag pos">'+posL+'</span>';tags+='<span class="tag win">'+winL+'</span>';tags+='<span class="tag han">'+hanL+'</span>';if(q.h<13&&q.h<=4)tags+='<span class="tag fu">'+q.f+'符</span>';document.getElementById('qtags').innerHTML=tags;var posT=q.p==='dealer'?'親':'子';var hanT=q.h>=13?'役満':q.h+'翻'+(q.h<=4?q.f+'符':'');var winT=q.w==='ron'?'ロン':'ツモ';var qsub='';if(q.w==='tsumo'){qsub=q.p==='dealer'?'<br><span style="font-size:13px;color:#7a9a8a">（全員からいくら？）</span>':'<br><span style="font-size:13px;color:#7a9a8a">（子から / 親からいくら？）</span>';}document.getElementById('qmain').innerHTML='<span class="ac">'+posT+'</span>が<span class="ac">'+hanT+'</span>で<span class="ac">'+winT+'</span>のアガリ。<br>何点？'+qsub;document.getElementById('rp').className='rpanel';document.getElementById('nxtbar').style.display='none';var ans=calcAns(q.h,q.f,q.p,q.w);ST.curAns=ans;if(ST.mode==='choice'){document.getElementById('ca').style.display='';document.getElementById('ia').style.display='none';renderChoices(ans,q);}else{document.getElementById('ca').style.display='none';document.getElementById('ia').style.display='';renderInputArea(ans,q);}}
+function renderQ(){var q=ST.qs[ST.cur];ST.done=false;document.getElementById('pb').style.width=(ST.cur/ST.qs.length*100)+'%';document.getElementById('qn').textContent='QUESTION '+(ST.cur+1)+' / '+ST.qs.length;var posL=q.p==='dealer'?'親':'子';var winL=q.w==='ron'?'ロン':'ツモ';var hanL=q.h>=13?'役満':hlbl(q.h)+(q.h<=4?' '+q.h+'翻':'');var tags='<span class="tag pos">'+posL+'</span>';tags+='<span class="tag win">'+winL+'</span>';tags+='<span class="tag han">'+hanL+'</span>';if(q.h<13&&q.h<=4)tags+='<span class="tag fu">'+q.f+'符</span>';document.getElementById('qtags').innerHTML=tags;var posT=q.p==='dealer'?'親':'子';var hanT=q.h>=13?'役満':q.h+'翻'+(q.h<=4?q.f+'符':'');var winT=q.w==='ron'?'ロン':'ツモ';var qsub='';if(q.w==='tsumo'){qsub=q.p==='dealer'?'<br><span style="font-size:13px;color:#b08060">（全員からいくら？）</span>':'<br><span style="font-size:13px;color:#b08060">（子から / 親からいくら？）</span>';}document.getElementById('qmain').innerHTML='<span class="ac">'+posT+'</span>が<span class="ac">'+hanT+'</span>で<span class="ac">'+winT+'</span>のアガリ。<br>何点？'+qsub;document.getElementById('rp').className='rpanel';document.getElementById('nxtbar').style.display='none';var ans=calcAns(q.h,q.f,q.p,q.w);ST.curAns=ans;if(ST.mode==='choice'){document.getElementById('ca').style.display='';document.getElementById('ia').style.display='none';renderChoices(ans,q);}else{document.getElementById('ca').style.display='none';document.getElementById('ia').style.display='';renderInputArea(ans,q);}}
 function renderChoices(ans,q){var g=document.getElementById('cg');g.innerHTML='';if(ans.type==='ron'){var cs=mkChoicesRon(ans.total);for(var i=0;i<cs.length;i++){(function(v){var b=document.createElement('div');b.className='cbtn';b.innerHTML=nm(v)+'<span class="csub">点</span>';b.onclick=function(){pickRon(v,ans,b,q);};g.appendChild(b);})(cs[i]);}}else{var isDealer=(ans.type==='dealer_tsumo');var cs=mkChoicesTsumo(ans);for(var i=0;i<cs.length;i++){(function(opt){var b=document.createElement('div');b.className='cbtn';if(isDealer){b.innerHTML=nm(opt.c)+'<span class="csub">オール</span>';}else{b.innerHTML=nm(opt.c)+' / '+nm(opt.d)+'<span class="csub">子 / 親</span>';}var isCorrect=(isDealer?(opt.c===ans.each):(opt.c===ans.child&&opt.d===ans.dealer));b.onclick=function(){pickTsumo(isCorrect,opt,ans,b,q);};g.appendChild(b);})(cs[i]);}}}
 function pickRon(v,ans,btn,q){if(ST.done)return;ST.done=true;var ok=(v===ans.total);btn.className='cbtn '+(ok?'cor':'wrg');var bs=document.getElementById('cg').children;for(var i=0;i<bs.length;i++){var txt=bs[i].textContent.replace(/[^0-9]/g,'');var bv=parseInt(txt,10);if(bv===ans.total&&bs[i]!==btn)bs[i].className='cbtn rcor';}record(q,ans,v,ok);showResult(ok,ans,q);}
 function pickTsumo(isCorrect,opt,ans,btn,q){if(ST.done)return;ST.done=true;btn.className='cbtn '+(isCorrect?'cor':'wrg');var bs=document.getElementById('cg').children;var isDealer=(ans.type==='dealer_tsumo');for(var i=0;i<bs.length;i++){if(bs[i]===btn)continue;var corC=isDealer?ans.each:ans.child;var first=parseInt(bs[i].textContent.replace(/[^0-9]/,''),10);if(first===corC)bs[i].className='cbtn rcor';}record(q,ans,opt,isCorrect);showResult(isCorrect,ans,q);}
 var inputFocus='child';
-function renderInputArea(ans,q){var isTsumo=(ans.type!=='ron');var isDealer=(ans.type==='dealer_tsumo');var np='<div class="npad"><div class="nb" onclick="ni(\'7\')">7</div><div class="nb" onclick="ni(\'8\')">8</div><div class="nb" onclick="ni(\'9\')">9</div><div class="nb" onclick="ni(\'4\')">4</div><div class="nb" onclick="ni(\'5\')">5</div><div class="nb" onclick="ni(\'6\')">6</div><div class="nb" onclick="ni(\'1\')">1</div><div class="nb" onclick="ni(\'2\')">2</div><div class="nb" onclick="ni(\'3\')">3</div><div class="nb z2" onclick="ni(\'0\')">0</div><div class="nb del" onclick="nd()">⌫</div></div><button class="sbtn" id="subbtn" onclick="submitAns()" disabled>答え合わせ</button>';if(!isTsumo){document.getElementById('ia').innerHTML='<div class="inpw"><input type="text" class="sinp" id="si" readonly placeholder="0"><span class="iunit">点</span></div>'+np;inputFocus='single';}else if(isDealer){document.getElementById('ia').innerHTML='<div style="font-size:12px;color:#7a9a8a;margin-bottom:6px">全員から（1人あたり）</div><div class="inpw"><input type="text" class="sinp" id="si" readonly placeholder="0"><span class="iunit">点</span></div>'+np;inputFocus='single';}else{document.getElementById('ia').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><div><div style="font-size:11px;color:#7a9a8a;margin-bottom:4px;text-align:center">子から</div><div class="sinp" id="si-child" onclick="setFocus(\'child\')" style="cursor:pointer;min-height:56px;display:flex;align-items:center;padding:12px 14px;font-size:26px;font-weight:900;color:#e6cc7a;border:2px solid #c8a84b">0</div></div><div><div style="font-size:11px;color:#7a9a8a;margin-bottom:4px;text-align:center">親から</div><div class="sinp" id="si-dealer" onclick="setFocus(\'dealer\')" style="cursor:pointer;min-height:56px;display:flex;align-items:center;padding:12px 14px;font-size:26px;font-weight:900;color:#e6cc7a;border:2px solid #253d2e">0</div></div></div>'+np;inputFocus='child';}}
-window.setFocus=function(which){inputFocus=which;var cd=document.getElementById('si-child'),dd=document.getElementById('si-dealer');if(cd)cd.style.borderColor=which==='child'?'#c8a84b':'#253d2e';if(dd)dd.style.borderColor=which==='dealer'?'#c8a84b':'#253d2e';};
+function renderInputArea(ans,q){var isTsumo=(ans.type!=='ron');var isDealer=(ans.type==='dealer_tsumo');var np='<div class="npad"><div class="nb" onclick="ni(\'7\')">7</div><div class="nb" onclick="ni(\'8\')">8</div><div class="nb" onclick="ni(\'9\')">9</div><div class="nb" onclick="ni(\'4\')">4</div><div class="nb" onclick="ni(\'5\')">5</div><div class="nb" onclick="ni(\'6\')">6</div><div class="nb" onclick="ni(\'1\')">1</div><div class="nb" onclick="ni(\'2\')">2</div><div class="nb" onclick="ni(\'3\')">3</div><div class="nb z2" onclick="ni(\'0\')">0</div><div class="nb del" onclick="nd()">⌫</div></div><button class="sbtn" id="subbtn" onclick="submitAns()" disabled>答え合わせ</button>';if(!isTsumo){document.getElementById('ia').innerHTML='<div class="inpw"><input type="text" class="sinp" id="si" readonly placeholder="0"><span class="iunit">点</span></div>'+np;inputFocus='single';}else if(isDealer){document.getElementById('ia').innerHTML='<div style="font-size:12px;color:#b08060;margin-bottom:6px">全員から（1人あたり）</div><div class="inpw"><input type="text" class="sinp" id="si" readonly placeholder="0"><span class="iunit">点</span></div>'+np;inputFocus='single';}else{document.getElementById('ia').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><div><div style="font-size:11px;color:#b08060;margin-bottom:4px;text-align:center">子から</div><div class="sinp" id="si-child" onclick="setFocus(\'child\')" style="cursor:pointer;min-height:56px;display:flex;align-items:center;padding:12px 14px;font-size:26px;font-weight:900;color:#c1440e;border:2px solid #f4a261">0</div></div><div><div style="font-size:11px;color:#b08060;margin-bottom:4px;text-align:center">親から</div><div class="sinp" id="si-dealer" onclick="setFocus(\'dealer\')" style="cursor:pointer;min-height:56px;display:flex;align-items:center;padding:12px 14px;font-size:26px;font-weight:900;color:#c1440e;border:2px solid #f0d8c0">0</div></div></div>'+np;inputFocus='child';}}
+window.setFocus=function(which){inputFocus=which;var cd=document.getElementById('si-child'),dd=document.getElementById('si-dealer');if(cd)cd.style.borderColor=which==='child'?'#f4a261':'#f0d8c0';if(dd)dd.style.borderColor=which==='dealer'?'#f4a261':'#f0d8c0';};
 window.ni=function(n){if(ST.done)return;if(inputFocus==='single'){var inp=document.getElementById('si');if(!inp)return;if(inp.value==='0'||inp.value==='')inp.value=n;else if(inp.value.length<6)inp.value+=n;document.getElementById('subbtn').disabled=(inp.value===''||inp.value==='0');}else{var el=document.getElementById('si-'+inputFocus);if(!el)return;var cur=el.textContent==='0'?'':el.textContent;if(cur.length<5)el.textContent=cur+n;var c=parseInt(document.getElementById('si-child').textContent||'0',10)||0;var d=parseInt(document.getElementById('si-dealer').textContent||'0',10)||0;document.getElementById('subbtn').disabled=(c===0&&d===0);}};
 window.nd=function(){if(ST.done)return;if(inputFocus==='single'){var inp=document.getElementById('si');if(!inp)return;inp.value=inp.value.slice(0,-1)||'';document.getElementById('subbtn').disabled=(inp.value===''||inp.value==='0');}else{var el=document.getElementById('si-'+inputFocus);if(!el)return;el.textContent=el.textContent.slice(0,-1)||'0';}};
 window.submitAns=function(){if(ST.done)return;var q=ST.qs[ST.cur],ans=ST.curAns;ST.done=true;document.getElementById('subbtn').disabled=true;var ok,ua;if(ans.type==='ron'){var uv=parseInt(document.getElementById('si').value,10)||0;ok=(uv===ans.total);ua=uv;}else if(ans.type==='dealer_tsumo'){var uv=parseInt(document.getElementById('si').value,10)||0;ok=(uv===ans.each);ua=uv;}else{var uc=parseInt((document.getElementById('si-child')||{textContent:'0'}).textContent,10)||0;var ud=parseInt((document.getElementById('si-dealer')||{textContent:'0'}).textContent,10)||0;ok=(uc===ans.child&&ud===ans.dealer);ua={child:uc,dealer:ud};}record(q,ans,ua,ok);showResult(ok,ans,q);};
@@ -179,7 +150,6 @@ function ansLabel(ans){if(ans.type==='ron')return nm(ans.total)+'点';if(ans.typ
 function showResult(ok,ans,q){var rp=document.getElementById('rp');rp.className='rpanel on '+(ok?'cor':'wrg');document.getElementById('ric').textContent=ok?'○':'×';document.getElementById('rt').textContent=ok?'正解！':'不正解…';document.getElementById('arv').textContent=ansLabel(ans);document.getElementById('expl').innerHTML='';var nb=document.getElementById('nxtbtn');nb.textContent=ST.cur+1>=ST.qs.length?'結果を見る →':'次の問題へ →';document.getElementById('nxtbar').style.display='';}
 window.next=function(){document.getElementById('nxtbar').style.display='none';ST.cur++;if(ST.cur>=ST.qs.length){showResultScr();}else{renderQ();window.scrollTo(0,0);}};
 function showResultScr(){var cor=0;for(var i=0;i<ST.ans.length;i++)if(ST.ans[i].ok)cor++;var tot2=ST.ans.length,rate=cor/tot2;var emoji='😢',title='もう少し！',stars='☆☆☆';if(rate>=1){emoji='🎊';title='満点！完璧！';stars='★★★';}else if(rate>=0.8){emoji='🏆';title='すばらしい！';stars='★★☆';}else if(rate>=0.6){emoji='👍';title='いい感じ！';stars='★☆☆';}else if(rate>=0.4){emoji='💪';title='まだまだ練習！';stars='☆☆☆';}document.getElementById('re').innerHTML=emoji;document.getElementById('rt2').textContent=title;document.getElementById('rs').textContent=stars;document.getElementById('rscore').textContent=cor+'/'+tot2;document.getElementById('rsub').textContent='正解率 '+Math.round(rate*100)+'%  最大連続 '+ST.best+'問';var bl=document.getElementById('blist');bl.innerHTML='';for(var i=0;i<ST.ans.length;i++){var a=ST.ans[i],q=a.q;var posT=q.p==='dealer'?'親':'子';var winT=q.w==='ron'?'ロン':'ツモ';var hanT=q.h>=13?'役満':q.h+'翻'+(q.h<=4?q.f+'符':'');var d=document.createElement('div');d.className='bi';var corStr=ansLabel(a.ans);var ca=a.ok?'':'<div class="bca">正解：'+corStr+'</div>';d.innerHTML='<div class="bdot '+(a.ok?'c':'w')+'"></div><div><div class="bq">Q'+(i+1)+' '+posT+hanT+winT+'</div><div class="ba">'+(a.ok?corStr+' ✓':'不正解')+'</div>'+ca+'</div>';bl.appendChild(d);}document.getElementById('pb').style.width='100%';showScr('s-result');}
-
 })();
 </script>
 </body>
