@@ -107,22 +107,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","H
 <script>
 (function(){
 "use strict";
-var EXPIRY=new Date('2026-05-31T23:59:59');
+var EXPIRY=new Date('2026-07-31T23:59:59');
 if(new Date()>EXPIRY){
-  document.getElementById('app').innerHTML='<div class="expired"><div class="expired-icon">🀄</div><div class="expired-title">公開期間が終了しました</div><div class="expired-msg">この教材の公開期間は<br>2026年5月31日をもって終了しました。<br><br>点数計算の続きは<br>ぜひ授業で練習しましょう！</div><div class="expired-school">ニューロン麻雀スクール神戸校</div></div>';
+  document.getElementById('app').innerHTML='<div class="expired"><div class="expired-icon">🀄</div><div class="expired-title">公開期間が終了しました</div><div class="expired-msg">この教材の公開期間は<br>2026年7月31日をもって終了しました。<br><br>点数計算の続きは<br>ぜひ授業で練習しましょう！</div><div class="expired-school">ニューロン麻雀スクール神戸校</div></div>';
   return;
 }
 
 document.getElementById('app').innerHTML=
 '<div class="stats"><span class="sv" id="st-total">0</span><span class="sl">問</span><span class="sv" id="st-cor">0</span><span class="sl">正解</span><span class="sv" id="st-str">0</span><span class="sl">連続</span></div>'+
-'<div id="s-start" class="scr on"><div class="st">点数計算を鍛えよう🀄</div><div class="ss">モードを選んでスタート</div><div style="font-size:11px;color:#e8a87c;text-align:center;margin-top:6px;">公開期限：2026年5月31日</div><div class="mgrid"><div class="mc feat" onclick="go(\'choice\',\'easy\')"><div class="mi">🌸</div><div class="mn">初級</div><div class="md">基本的な翻符<br>4択で回答</div></div><div class="mc" onclick="go(\'choice\',\'normal\')"><div class="mi">🌺</div><div class="mn">中級</div><div class="md">高翻数・様々な符<br>4択で回答</div></div><div class="mc" onclick="go(\'input\',\'easy\')"><div class="mi">✏️</div><div class="mn">入力初級</div><div class="md">数字を自分で<br>入力して回答</div></div><div class="mc" onclick="go(\'input\',\'normal\')"><div class="mi">⭐</div><div class="mn">入力中級</div><div class="md">高翻数・様々な符<br>数字入力</div></div></div></div>'+
+'<div id="s-start" class="scr on"><div class="st">点数計算を鍛えよう🀄</div><div class="ss">モードを選んでスタート</div><div style="font-size:11px;color:#e8a87c;text-align:center;margin-top:6px;">公開期限：2026年7月31日</div><div class="mgrid"><div class="mc feat" onclick="go(\'choice\',\'easy\')"><div class="mi">🌸</div><div class="mn">初級</div><div class="md">基本的な翻符<br>4択で回答</div></div><div class="mc" onclick="go(\'choice\',\'normal\')"><div class="mi">🌺</div><div class="mn">中級</div><div class="md">高翻数・様々な符<br>4択で回答</div></div><div class="mc" onclick="go(\'input\',\'easy\')"><div class="mi">✏️</div><div class="mn">入力初級</div><div class="md">数字を自分で<br>入力して回答</div></div><div class="mc" onclick="go(\'input\',\'normal\')"><div class="mi">⭐</div><div class="mn">入力中級</div><div class="md">高翻数・様々な符<br>数字入力</div></div></div></div>'+
 '<div id="s-quiz" class="scr"><div class="pbw"><div class="pbf" id="pb" style="width:0%"></div></div><div class="qcard"><div class="qn" id="qn">QUESTION 1 / 10</div><div class="qtags" id="qtags"></div><div class="qmain" id="qmain"></div></div><div class="albl">▶ 何点？</div><div id="ca"><div class="cgrid" id="cg"></div></div><div id="ia" style="display:none"></div><div class="rpanel" id="rp"><div class="rhead"><span class="ric" id="ric"></span><span class="rtitle" id="rt"></span></div><div class="arev"><div class="arlbl">正解</div><div class="arval" id="arv"></div></div><div class="expl" id="expl"></div><div style="height:80px"></div></div></div>'+
 '<div id="nxtbar" style="display:none;position:fixed;bottom:0;left:0;right:0;padding:12px 16px 28px;background:linear-gradient(transparent,#fdf6ee 40%);z-index:100;"><button class="nbtn" id="nxtbtn" style="display:block" onclick="next()">次の問題へ →</button></div>'+
 '<div id="s-result" class="scr"><div class="rcard"><div class="rce" id="re">🎊</div><div class="rct" id="rt2">お疲れさま！</div><div class="rstars" id="rs">☆☆☆</div><div class="rcs" id="rscore">10/10</div><div class="rcss" id="rsub"></div></div><div class="slbl">問題ごとの結果</div><div class="blist" id="blist"></div><button class="sbtn" onclick="retry()">もう一度やる</button><button class="bbk" onclick="home()">モード選択へ戻る</button></div>';
 
 function c100(n){return Math.ceil(n/100)*100;}
 
-// ★ 切り上げ満貫対応の基本点計算
 function bpts(han,fu){
   if(han>=13)return 8000;
   if(han>=11)return 6000;
@@ -130,18 +129,15 @@ function bpts(han,fu){
   if(han>=6)return 3000;
   if(han>=5)return 2000;
   var r=fu*Math.pow(2,han+2);
-  // 切り上げ満貫：7700点以上なら満貫(2000)扱い
   if(r>=1920)return 2000;
   return r;
 }
 
-// ★ 点数計算（切り上げ満貫対応）
 function calcAns(han,fu,pos,win){
   var b=bpts(han,fu);
   if(win==='ron'){
     var raw=pos==='dealer'?b*6:b*4;
     var t=c100(raw);
-    // 切り上げ満貫：11600→12000
     if(pos==='dealer'&&t===11600)t=12000;
     if(pos==='child'&&t===7700)t=8000;
     return {type:'ron',total:t};
@@ -153,8 +149,6 @@ function calcAns(han,fu,pos,win){
     } else {
       var rawD=b*2,rawC=b;
       var d=c100(rawD),ch=c100(rawC);
-      // 切り上げ満貫ツモ対応
-      if(d===3900)d=3900; // 通常通り
       return {type:'child_tsumo',dealer:d,child:ch,total:d+ch*2};
     }
   }
@@ -182,7 +176,6 @@ var QE=[
   {h:2,f:50,p:'dealer',w:'ron'},{h:2,f:50,p:'child',w:'ron'},
   {h:1,f:30,p:'dealer',w:'tsumo'},{h:2,f:30,p:'child',w:'tsumo'},
   {h:2,f:40,p:'dealer',w:'tsumo'},{h:3,f:30,p:'child',w:'tsumo'},
-  // 切り上げ満貫の問題を追加
   {h:3,f:60,p:'dealer',w:'ron'},{h:3,f:60,p:'child',w:'ron'},
   {h:4,f:30,p:'dealer',w:'tsumo'},{h:4,f:30,p:'child',w:'tsumo'}
 ];
